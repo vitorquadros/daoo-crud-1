@@ -19,12 +19,12 @@ class Pessoa{
 	}
 
 	public function calcImc(){
-        if ($this->peso && $this->altura) {
-            $this->imc = $this->peso/$this->altura**2;
-        }else{
-			echo "Erro, informe o peso e a altura primeiro!";
-		}
-	}
+    if ($this->peso && $this->altura) {
+        $this->imc = $this->peso/$this->altura**2;
+    } else {
+        echo "Erro, informe o peso e a altura primeiro!";
+    }
+}
 
 	public function showIMC()
 	{	
@@ -61,11 +61,15 @@ class Pessoa{
 	// }
 
 	public function __set($name,$value){
-		if($name == 'imc'){
-			$this->imc = $value;
-			$this->peso = $this->altura**2*$this->imc;
+			if($name==='imc' && is_array($value)){
+				$this->peso = $value[0];
+				$this->altura = $value[1];
+			}else{
+				$this->$name = $value;
+			}
+			$this->calcImc();
+			// echo "__set";
 		}
-	}
 
 	// public function __set($name,$value){
 	// 	$this->$name = $value;
