@@ -1,11 +1,25 @@
 <?php
-namespace logs; //use logs\Relatorio
-use classes\Atleta as IMC;
+namespace logs;
+use classes\Pessoa;
 
 class Relatorio {
-	public static function log(IMC $imc)
+
+	private $pessoas = [];
+
+	public function add(Pessoa $pessoa)
 	{
-		echo "\nlog:\n";
-		var_dump($imc);
+		$this->pessoas[]=$pessoa;
+	}
+	
+	public function log(Pessoa $pessoa)
+	{
+		echo "\nlog: ".$pessoa;
+	}
+
+	public function imprime(){
+		echo "\n### RELATORIO ###\n";
+		foreach ($this->pessoas as $pessoa)
+			 $this->log($pessoa);
+		echo "\n#############\n";
 	}
 }
