@@ -18,16 +18,7 @@ class Atleta extends Pessoa
 		$this->altura = $altura;
 		if($idade) 
 			$this->idade = $idade;
-		$this->calcImc();
-	}
-
-	public function calcImc()
-	{
-		if ($this->peso && $this->altura) {
-			$this->imc = $this->peso / $this->altura ** 2;
-		} else {
-			echo "Erro, informe o peso e a altura primeiro!";
-		}
+		$this->calc();
 	}
 
 	public function showIMC()
@@ -39,13 +30,13 @@ class Atleta extends Pessoa
 	public function setAltura($altura)
 	{
 		$this->altura = $altura;
-		$this->calcImc();
+		$this->calc();
 	}
 
 	public function setPeso($peso)
 	{
 		$this->peso = $peso;
-		$this->calcImc();
+		$this->calc();
 	}
 
 	public function getAltura()
@@ -66,7 +57,7 @@ class Atleta extends Pessoa
 		} else {
 			$this->$name = $value;
 		}
-		$this->calcImc();
+		$this->calc();
 	}
 
 	public function __get($name){
@@ -76,11 +67,20 @@ class Atleta extends Pessoa
 	public function __toString()
 	{
 	
-		return 	"\n===Dados do Atleta==="
+		return 	"\n\n===Dados do Atleta==="
                     ."\nNome: $this->nome"
                    	. ($this->idade?"\nIdade: $this->idade":"")
                     ."\nPeso: $this->peso"
                     ."\nAltura: $this->altura"
-					. "\nIMC: " . number_format($this->imc, 2) . "\n";
+					."\nIMC:\n  - Valor: " . number_format($this->imc, 2)
+					."\n  - Classificacao: ".$this->classifica()
+					.($this->idade
+						?"\n  - Para Idade: ".
+						($this->isNormal()
+								?"Normal"
+								:"Anormal")
+						:"")
+					."\n==================\n";
+
 	}
 }
