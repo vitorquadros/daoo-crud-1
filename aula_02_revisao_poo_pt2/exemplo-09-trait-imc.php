@@ -3,7 +3,6 @@ require 'autoload.php';
 
 $jogador = new \classes\Atleta('Douglas',1.86,89);
 
-
 echo $jogador->calc();
 echo "\n";
 echo $jogador->classifica();

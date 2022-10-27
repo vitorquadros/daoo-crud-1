@@ -66,7 +66,6 @@ class Atleta extends Pessoa
 
 	public function __toString()
 	{
-	
 		return 	"\n\n===Dados do Atleta==="
                     ."\nNome: $this->nome"
                    	. ($this->idade?"\nIdade: $this->idade":"")

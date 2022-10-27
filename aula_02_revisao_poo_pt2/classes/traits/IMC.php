@@ -12,7 +12,7 @@ trait IMC{
 		}
 	}
 
-	public function classifica(){
+	public function classifica() : ?string {
 		if(!$this->imc){
 			$this->calc($this);
 		}
@@ -27,7 +27,7 @@ trait IMC{
 		}
 	}
 
-	public function isNormal(){
+	public function isNormal() : bool{
 		if(!$this->idade){
 			echo "\nErro: defina a idade!\n";
 		} 
@@ -70,5 +70,4 @@ trait IMC{
 
 		return false;
 	}
-
 }
