@@ -20,3 +20,6 @@ else
 $msg .= " para a idade $jogador->idade!";
 
 echo $msg;
+
+//Usando a toString
+echo $jogador;
