@@ -1,21 +1,18 @@
 <?php
 require 'autoload.php';
 
-use classes\IMC;
-use \classes\Atleta;
-
-$jogador = new Atleta('Douglas',1.86,89);
+$jogador = new \classes\Atleta('Douglas',1.86,89);
 
 
-echo IMC::calc($jogador);
+echo $jogador->calc();
 echo "\n";
-echo IMC::classifica($jogador);
+echo $jogador->classifica();
 
 $jogador->idade = 37;
 
 $msg = "\nO IMC de $jogador->nome é ";
 
-if(IMC::isNormal($jogador))
+if($jogador->isNormal())
 	$msg .= "NORMAL";
 else 
 	$msg .= "ANORMAL";

@@ -2,8 +2,11 @@
 
 namespace classes;
 
+use \classes\traits\IMC;
+
 class Atleta extends Pessoa
 {
+	use IMC;
 
 	public $peso, $altura;
 	private $imc;
