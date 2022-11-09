@@ -4,6 +4,7 @@
 
 -- Dumped from database version 12.10 (Ubuntu 12.10-1.pgdg20.04+1)
 -- Dumped by pg_dump version 12.10 (Ubuntu 12.10-1.pgdg20.04+1)
+-- Import command: psql -U root [db_name] < pgsql_apiprod.sql
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
