@@ -15,6 +15,6 @@
     "require": {},
     "scripts":{
         "api":"php -S localhost:8081 src/index.php",
-        "test":"php -S localhost:8080 -t src/"
+        "test":"php -S localhost:8080 -t src/tests/"
     }
 }

@@ -10,14 +10,14 @@ class Route
 	{
 
 		$url_path = trim($_SERVER['REQUEST_URI'], '/');
-		$path = explode('/', $url_path);
-		self::$query = $path;
+		self::$query = explode('/', $url_path);
 		
 		$class = null;
 		$method = null;
 		$param = null;
+
 		error_log("Route: $url_path"); 
-		error_log("Query string: \n".print_r(self::$query, TRUE)); 
+		error_log("Query array: \n".print_r(self::$query, TRUE));
 		if (self::$query) {
 			$class_name = self::$query[0];
 			if (count(self::$query) > 1) {

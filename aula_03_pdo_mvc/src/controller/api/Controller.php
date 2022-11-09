@@ -4,7 +4,6 @@ namespace Daoo\Aula03\controller\api;
 
 abstract class Controller{
 
-	protected static $query;
 	protected $model;
 
 	public abstract function index();
@@ -12,5 +11,4 @@ abstract class Controller{
 	protected function setHeader(){
 		header("Content-Type:application/json;charset=utf-8'");
 	}
-
 }

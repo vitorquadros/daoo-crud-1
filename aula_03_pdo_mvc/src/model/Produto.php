@@ -22,31 +22,17 @@ class Produto extends Model implements DAO
         $this->setTable($this);
     }
 
-    public function create()
-    {
-        try {
-            $sql = "INSERT INTO produtos ($this->columns) VALUES ($this->params)";
-            $prepStmt = $this->conn->prepare($sql);
-            $result = $prepStmt->execute($this->values);
-            $this->dumpQuery($prepStmt);
-            return ($result && $prepStmt->rowCount() == 1);
-        } catch (\Exception $error) {
-            error_log("ERRO: " . print_r($error, TRUE));
-            $this->dumpQuery($prepStmt);
-            return false;
-        }
-    }
-
     public function read($id = null)
     {
         try {
-            if ($id) {
-                $sql = "SELECT * FROM produtos WHERE id_prod = :id";
-            } else {
-                $sql = "SELECT * FROM produtos";
-            }
+            $sql = "SELECT * FROM produtos ";
+            if ($id)
+                $sql .= " WHERE id_prod = :id";
+          
             $prepStmt = $this->conn->prepare($sql);
-            if ($id) $prepStmt->bindValue(':id', $id);
+            if ($id) 
+                $prepStmt->bindValue(':id', $id);
+            
             if ($prepStmt->execute()) {
                 $this->dumpQuery($prepStmt);
                 return $prepStmt->fetchAll(self::FETCH);
@@ -58,18 +44,36 @@ class Produto extends Model implements DAO
         }
     }
 
+    public function create()
+    {
+        try {
+            $sql = "INSERT INTO produtos ($this->columns) " 
+                    ."VALUES ($this->params)";
+            $prepStmt = $this->conn->prepare($sql);
+            $result = $prepStmt->execute($this->values);
+            $this->dumpQuery($prepStmt);
+            return ($result && $prepStmt->rowCount() == 1);
+        } catch (\Exception $error) {
+            error_log("ERRO: " . print_r($error, TRUE));
+            $this->dumpQuery($prepStmt);
+            return false;
+        }
+    }
+
+
     public function update()
     {
         try {
             $this->values[':id'] = $this->id;
-            $sql = "UPDATE produtos SET $this->updated WHERE id_prod = :id";
+            $sql = "UPDATE produtos SET $this->updated  WHERE id_prod = :id";
             $prepStmt = $this->conn->prepare($sql);
             $prepStmt->bindValue(':importado', $this->importado);
-            if ($prepStmt->execute($this->values))
+            if ($prepStmt->execute($this->values)){
+                $this->dumpQuery($prepStmt);
                 return $prepStmt->rowCount() > 0;
+            }
         } catch (\Exception $error) {
             error_log("ERRO: " . print_r($error, TRUE));
-            $this->dumpQuery($prepStmt);
             return false;
         }
     }
