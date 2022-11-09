@@ -14,4 +14,4 @@ if(isset($_GET['id'])) {
     else
         $json = ['Erro'=>"Produto não encontrado"];
     echo json_encode($json);
-}
+}else echo json_encode($prodDao->read());
