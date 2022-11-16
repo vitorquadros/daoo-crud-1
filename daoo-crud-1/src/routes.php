@@ -1,11 +1,15 @@
 <?php
 
 use Daoo\Aula03\controller\Route;
-use Daoo\Aula03\controller\api\Produto;
+use Daoo\Aula03\controller\api\Doctor;
+use Daoo\Aula03\controller\api\Appointment;
+use Daoo\Aula03\controller\api\Vaccine;
 // use Daoo\Aula03\controller\api\Usuario;
 
 Route::routes([
-	'produto' => Produto::class,
+	'doctor' => Doctor::class,
+	'appointment' => Appointment::class,
+	'vaccine' => Vaccine::class,
 	// 'usuario' => Usuaraio::class
 ]);
 

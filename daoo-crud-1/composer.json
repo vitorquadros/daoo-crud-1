@@ -1,20 +1,14 @@
 {
-    "name": "daoo/aula03",
-    "license": "GPL",
-    "autoload": {
-        "psr-4": {
-            "Daoo\\Aula03\\": "src/"
-        }
-    },
-    "authors": [
-        {
-            "name": "Gill Velleda Gonzales",
-            "email": "gillvelleda@gmail.com"
-        }
-    ],
-    "require": {},
-    "scripts":{
-        "api":"php -S localhost:8081 src/index.php",
-        "test":"php -S localhost:8080 -t src/tests/"
+  "name": "daoo/aula03",
+  "license": "GPL",
+  "autoload": {
+    "psr-4": {
+      "Daoo\\Aula03\\": "src/"
     }
+  },
+  "require": {},
+  "scripts": {
+    "api": "php -S localhost:8081 src/index.php",
+    "test": "php -S localhost:8080 -t src/tests/"
+  }
 }

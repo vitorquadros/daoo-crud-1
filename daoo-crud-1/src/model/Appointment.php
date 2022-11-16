@@ -2,22 +2,17 @@
 
 namespace Daoo\Aula03\model;
 
-class Produto extends Model implements DAO
+class Appointment extends Model implements DAO
 {
-    private $id, $nome, $descricao, 
-            $quantidadeEstoque, $preco, $importado;
+    private $id, $description, $date;
 
     public function __construct(
-            $nome = '',$descricao = '',$quantidade = 0,
-            $preco = 0,$importado = false
+            $description = '',$date = '2022-05-05'
         ) {
         parent::__construct();
 
-        $this->nome = $nome;
-        $this->descricao = $descricao;
-        $this->quantidadeEstoque = $quantidade;
-        $this->preco = $preco;
-        $this->importado = $importado;
+        $this->description = $description;
+        $this->date = $date;
 
         $this->setTable($this);
     }
@@ -25,9 +20,9 @@ class Produto extends Model implements DAO
     public function read($id = null)
     {
         try {
-            $sql = "SELECT * FROM produtos ";
+            $sql = "SELECT * FROM appointments ";
             if ($id)
-                $sql .= " WHERE id_prod = :id";
+                $sql .= " WHERE id = :id";
           
             $prepStmt = $this->conn->prepare($sql);
             if ($id) 
@@ -47,7 +42,7 @@ class Produto extends Model implements DAO
     public function create()
     {
         try {
-            $sql = "INSERT INTO produtos ($this->columns) " 
+            $sql = "INSERT INTO appointments ($this->columns) " 
                     ."VALUES ($this->params)";
             $prepStmt = $this->conn->prepare($sql);
             $result = $prepStmt->execute($this->values);
@@ -65,22 +60,22 @@ class Produto extends Model implements DAO
     {
         try {
             $this->values[':id'] = $this->id;
-            $sql = "UPDATE produtos SET $this->updated  WHERE id_prod = :id";
+            $sql = "UPDATE appointments SET $this->updated  WHERE id = :id";
             $prepStmt = $this->conn->prepare($sql);
-            $prepStmt->bindValue(':importado', $this->importado);
+            // $prepStmt->bindValue(':importado', $this->importado);
             if ($prepStmt->execute($this->values)){
                 $this->dumpQuery($prepStmt);
                 return $prepStmt->rowCount() > 0;
             }
         } catch (\Exception $error) {
-            error_log("ERRO: " . print_r($error, TRUE));
+            error_log("ERROR: " . print_r($error, TRUE));
             return false;
         }
     }
 
     public function delete($id)
     {
-        $sql = "DELETE FROM produtos WHERE id_prod = :id";
+        $sql = "DELETE FROM appointments WHERE id = :id";
         $prepStmt = $this->conn->prepare($sql);
         if ($prepStmt->execute([':id' => $id]))
             return $prepStmt->rowCount() > 0;
@@ -90,7 +85,7 @@ class Produto extends Model implements DAO
     public function filter($arrayFilter)
     {
         $this->setFilters($arrayFilter);
-        $sql = "SELECT * FROM produtos WHERE $this->filters";
+        $sql = "SELECT * FROM appointments WHERE $this->filters";
         $prepStmt = $this->conn->prepare($sql);
         if ($prepStmt->execute($this->values))
             return $prepStmt->fetchAll(self::FETCH);
@@ -101,11 +96,8 @@ class Produto extends Model implements DAO
     public function mapColumns()
     {
         return  [
-            "nome" => $this->nome,
-            "descricao" => $this->descricao,
-            "qtd_estoque" => $this->quantidadeEstoque,
-            "preco" => $this->preco,
-            "importado" => $this->importado
+            "description" => $this->description,
+            "date" => $this->date,
         ];
     }
 
