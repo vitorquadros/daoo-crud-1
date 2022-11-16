@@ -1,0 +1,19 @@
+CREATE TABLE doctors (
+  id serial PRIMARY KEY,
+  name VARCHAR (255),
+  username VARCHAR (255) UNIQUE NOT NULL,
+  crm VARCHAR (255) NOT NULL
+);
+
+CREATE TABLE appointments (
+  id serial PRIMARY KEY,
+  description VARCHAR (255),
+  date TIMESTAMP NOT NULL
+);
+
+CREATE TABLE vaccines (
+  id serial PRIMARY KEY,
+  name VARCHAR (255),
+  date TIMESTAMP NOT NULL,
+  future boolean NOT NULL
+);
